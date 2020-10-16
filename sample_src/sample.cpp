@@ -26,6 +26,28 @@ int main()
 {
   try
   {
+	  THansenProblem17 hans;
+	  cout << "Hansen Problem 17" << std::endl;
+	  cout << "Known Opt Point = " << hans.GetOptimumPoint()[0] << std::endl;
+	  cout << "Known Opt Value = " << hans.ComputeFunction({ hans.GetOptimumPoint()[0] }) << std::endl;
+	  cout << std::endl;
+	  //Test
+	  vector<double> a, b;
+	  hans.GetBounds(a, b);
+	  double x = a[0];
+	  double h = 1e-3;
+	  double min_x = x;
+	  while (x <= b[0])
+	  {
+		  if (hans.ComputeFunction({ x }) < hans.ComputeFunction({ min_x }))
+			  min_x = x;
+		  x += h;
+	  }
+	  cout << "Real Opt Point = " << min_x << std::endl;
+	  cout << "Real Opt Value = " << hans.ComputeFunction({ min_x }) << std::endl;
+
+
+	  /*
     TGKLSProblem gkls;
     cout << "\n  GKLS Problem 1" << std::endl;
     cout << "GKLSProblem ( 0.5, 0.5 ) = " << gkls.ComputeFunction({ 0.5, 0.5 }) << std::endl;
@@ -213,6 +235,8 @@ int main()
       cout << "ComputeConstraint 0 = " << sqConstrProblem.ComputeConstraint(index, { 0.5, 0.5 })
         << std::endl;
     }
+
+	*/
   }
 
   catch (string s)
